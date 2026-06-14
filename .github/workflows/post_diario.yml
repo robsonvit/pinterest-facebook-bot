@@ -1,0 +1,47 @@
+name: Post diário Pinterest → Facebook
+
+on:
+  # Executa todo dia às 08:00 horário de Brasília (11:00 UTC)
+  schedule:
+    - cron: '0 11 * * *'
+
+  # Permite rodar manualmente pelo painel do GitHub
+  workflow_dispatch:
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar dependências
+        run: |
+          pip install --upgrade pip
+          pip install pinterest-dl pillow requests playwright
+          playwright install chromium --with-deps
+
+      - name: Gerar e publicar post
+        env:
+          # Apenas credenciais — todo o conteúdo está nas listas do script
+          PINTEREST_EMAIL:    ${{ secrets.PINTEREST_EMAIL }}
+          PINTEREST_PASSWORD: ${{ secrets.PINTEREST_PASSWORD }}
+          FB_PAGE_ID:         ${{ secrets.FB_PAGE_ID }}
+          FB_ACCESS_TOKEN:    ${{ secrets.FB_ACCESS_TOKEN }}
+        run: python scripts/post_diario.py
+
+      - name: Salvar imagem gerada (artefato)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-${{ github.run_number }}
+          path: post_final.jpg
+          retention-days: 7
