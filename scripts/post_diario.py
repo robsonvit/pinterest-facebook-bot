@@ -116,25 +116,28 @@ def baixar_imagem_pinterest(termo: str, destino: str = "imagem_raw.jpg") -> bool
     try:
         from pinterest_dl import PinterestDL
 
-        # Com credenciais: login headless → renova cookies a cada run
-        if email and password:
-            print("[Pinterest] Fazendo login (headless)...")
-            dl = PinterestDL.with_browser(headless=True)
-            dl.login(email, password)
-            url_busca = f"https://br.pinterest.com/search/pins/?q={urllib.parse.quote(termo)}"
-            results = dl.scrape_and_download(
-                url=url_busca,
-                output_dir="pinterest_tmp",
-                num=15,
-            )
-        else:
-            # Sem credenciais: tenta busca pública (menos confiável)
-            print("[Pinterest] Sem credenciais — tentando busca pública...")
-            results = PinterestDL.with_api().search_and_download(
-                query=termo,
-                output_dir="pinterest_tmp",
-                num=15,
-            )
+        try:
+            # Com credenciais: login headless → renova cookies a cada run
+            if email and password:
+                print("[Pinterest] Fazendo login (headless)...")
+                dl = PinterestDL.with_browser(headless=True)
+                dl.login(email, password)
+                url_busca = f"https://br.pinterest.com/search/pins/?q={urllib.parse.quote(termo)}"
+                results = dl.scrape_and_download(
+                    url=url_busca,
+                    output_dir="pinterest_tmp",
+                    num=15,
+                )
+            else:
+                # Sem credenciais: tenta busca pública (menos confiável)
+                print("[Pinterest] Sem credenciais — tentando busca pública...")
+                results = PinterestDL.with_api().search_and_download(
+                    query=termo,
+                    output_dir="pinterest_tmp",
+                    num=15,
+                )
+        except Exception as dl_err:
+            print(f"[Pinterest] Aviso durante o scrape (algumas podem ter falhado): {dl_err}")
 
         # Localiza os arquivos de imagem baixados
         pasta    = Path("pinterest_tmp")
