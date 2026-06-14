@@ -13,6 +13,7 @@ GitHub Secrets necessários:
 
 import os
 import sys
+import json
 import random
 import shutil
 import hashlib
@@ -61,15 +62,43 @@ Aceitar! ✅
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  SELEÇÃO ALEATÓRIA
+#  CONTROLE DE ESTADO E ROTAÇÃO
 # ═══════════════════════════════════════════════════════════════════════════
 
-# Termo de pesquisa fixo atual (Altere aqui o termo que deseja buscar)
-# SEARCH_TERM  = "foto do rio de janeiro" 
-SEARCH_TERM  = random.choice(TERMOS_BUSCA) # Usando a lista aleatória novamente
+ARQUIVO_ESTADO = "state.json"
 
-OVERLAY_TEXT = random.choice(FRASES_OVERLAY)
-FB_CAPTION   = random.choice(LEGENDAS_FACEBOOK)
+def carregar_estado():
+    if os.path.exists(ARQUIVO_ESTADO):
+        with open(ARQUIVO_ESTADO, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {
+        "last_term_index": -1,
+        "last_caption_index": -1,
+        "last_overlay_index": -1,
+        "posted_hashes": []
+    }
+
+def salvar_estado(estado):
+    with open(ARQUIVO_ESTADO, "w", encoding="utf-8") as f:
+        json.dump(estado, f, indent=4, ensure_ascii=False)
+
+estado_atual = carregar_estado()
+
+# Rotação de Termos
+idx_termo = (estado_atual.get("last_term_index", -1) + 1) % len(TERMOS_BUSCA)
+SEARCH_TERM = TERMOS_BUSCA[idx_termo]
+estado_atual["last_term_index"] = idx_termo
+
+# Rotação de Frases Overlay
+idx_overlay = (estado_atual.get("last_overlay_index", -1) + 1) % len(FRASES_OVERLAY)
+OVERLAY_TEXT = FRASES_OVERLAY[idx_overlay]
+estado_atual["last_overlay_index"] = idx_overlay
+
+# Rotação de Legendas
+idx_caption = (estado_atual.get("last_caption_index", -1) + 1) % len(LEGENDAS_FACEBOOK)
+FB_CAPTION = LEGENDAS_FACEBOOK[idx_caption]
+estado_atual["last_caption_index"] = idx_caption
+
 OUTPUT_IMAGE = "post_final.jpg"
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -96,7 +125,7 @@ def baixar_imagem_pinterest(termo: str, destino: str = "imagem_raw.jpg") -> bool
             results = dl.scrape_and_download(
                 url=url_busca,
                 output_dir="pinterest_tmp",
-                num=5,
+                num=15,
             )
         else:
             # Sem credenciais: tenta busca pública (menos confiável)
@@ -104,10 +133,10 @@ def baixar_imagem_pinterest(termo: str, destino: str = "imagem_raw.jpg") -> bool
             results = PinterestDL.with_api().search_and_download(
                 query=termo,
                 output_dir="pinterest_tmp",
-                num=5,
+                num=15,
             )
 
-        # Localiza o primeiro arquivo de imagem baixado
+        # Localiza os arquivos de imagem baixados
         pasta    = Path("pinterest_tmp")
         arquivos = (
             sorted(pasta.glob("*.jpg"))
@@ -118,14 +147,48 @@ def baixar_imagem_pinterest(termo: str, destino: str = "imagem_raw.jpg") -> bool
             print("[Pinterest] Nenhum arquivo encontrado na pasta.")
             return False
 
-        shutil.copy(str(arquivos[0]), destino)
+        # Verifica duplicatas usando hash
+        def get_file_hash(filepath):
+            with open(filepath, "rb") as f:
+                return hashlib.md5(f.read()).hexdigest()
+                
+        posted_hashes = estado_atual.get("posted_hashes", [])
+        imagem_escolhida = None
+        
+        for arq in arquivos:
+            arq_hash = get_file_hash(str(arq))
+            if arq_hash not in posted_hashes:
+                imagem_escolhida = arq
+                estado_atual["posted_hashes"].append(arq_hash)
+                # Mantém apenas os últimos 500 hashes
+                if len(estado_atual["posted_hashes"]) > 500:
+                    estado_atual["posted_hashes"].pop(0)
+                break
+        
+        if not imagem_escolhida:
+            print("[Pinterest] Todas as imagens baixadas já foram postadas (duplicadas).")
+            return False
+
+        shutil.copy(str(imagem_escolhida), destino)
         print(f"[Pinterest] ✓ Imagem salva: {destino} "
-              f"({arquivos[0].stat().st_size // 1024} KB)")
+              f"({imagem_escolhida.stat().st_size // 1024} KB)")
         return True
 
     except Exception as e:
         print(f"[Pinterest] Erro: {e}")
         return False
+
+def remover_metadados(caminho_imagem: str):
+    """Remove dados EXIF (metadados) da imagem."""
+    try:
+        print("[Processamento] Removendo metadados da imagem...")
+        img = Image.open(caminho_imagem)
+        # Converte para RGB e salva, o que remove EXIF por padrão
+        img_rgb = img.convert("RGB")
+        img_rgb.save(caminho_imagem, "JPEG")
+        print("[Processamento] ✓ Metadados removidos com sucesso.")
+    except Exception as e:
+        print(f"[Processamento] Erro ao remover metadados: {e}")
 
 
 def editar_imagem(entrada: str, saida: str, texto: str):
@@ -268,12 +331,18 @@ def main():
         print("ERRO: não foi possível baixar a imagem do Pinterest.")
         sys.exit(1)
 
+    # Remover metadados logo após o download
+    remover_metadados("imagem_raw.jpg")
+
     # Temporariamente desativada a edição de imagem
     # editar_imagem("imagem_raw.jpg", OUTPUT_IMAGE, OVERLAY_TEXT)
     # publicar_facebook(OUTPUT_IMAGE, FB_CAPTION)
     
     # Postar imagem original
     publicar_facebook("imagem_raw.jpg", FB_CAPTION)
+
+    # Salvar o estado atualizado (hashes, termos, legendas)
+    salvar_estado(estado_atual)
 
     print("\n✓ Fluxo concluído com sucesso!\n")
 
