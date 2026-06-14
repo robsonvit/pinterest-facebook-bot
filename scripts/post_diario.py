@@ -99,7 +99,10 @@ LEGENDAS_FACEBOOK = [
 #  SELEÇÃO ALEATÓRIA
 # ═══════════════════════════════════════════════════════════════════════════
 
-SEARCH_TERM  = random.choice(TERMOS_BUSCA)
+# Termo de pesquisa fixo atual (Altere aqui o termo que deseja buscar)
+SEARCH_TERM  = "foto do rio de janeiro" 
+# SEARCH_TERM  = random.choice(TERMOS_BUSCA) # Remova o comentário desta linha e apague a de cima para voltar a usar a lista
+
 OVERLAY_TEXT = random.choice(FRASES_OVERLAY)
 FB_CAPTION   = random.choice(LEGENDAS_FACEBOOK)
 OUTPUT_IMAGE = "post_final.jpg"
