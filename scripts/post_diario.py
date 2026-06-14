@@ -20,6 +20,7 @@ import requests
 from pathlib import Path
 from datetime import datetime, date
 from PIL import Image, ImageDraw, ImageFont
+import urllib.parse
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  LISTAS — edite à vontade
@@ -130,8 +131,9 @@ def baixar_imagem_pinterest(termo: str, destino: str = "imagem_raw.jpg") -> bool
                 PinterestDL.with_browser(headless=True)
                 .login(email, password)
             )
-            results = dl.search_and_download(
-                query=termo,
+            url_busca = f"https://br.pinterest.com/search/pins/?q={urllib.parse.quote(termo)}"
+            results = dl.scrape_and_download(
+                url=url_busca,
                 output_dir="pinterest_tmp",
                 num=5,
             )
