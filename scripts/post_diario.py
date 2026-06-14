@@ -27,72 +27,36 @@ import urllib.parse
 # ═══════════════════════════════════════════════════════════════════════════
 
 TERMOS_BUSCA = [
-    "foto do rio de janeiro",
-    "vista do rio de janeiro",
-    "paisagem rio de janeiro",
-    "pôr do sol rio de janeiro",
-    "praia de ipanema rio de janeiro",
-    "praia de copacabana",
-    "christ redeemer rio de janeiro",
-    "pão de açúcar rio de janeiro",
-    "lagoa rodrigo de freitas",
-    "barra da tijuca praia",
-    "santa teresa rio de janeiro",
-    "lapa rio de janeiro",
-    "pedra da gávea",
-    "floresta da tijuca",
-    "maracanã rio de janeiro",
-    "centro rio de janeiro histórico",
-    "niterói vista rio",
-    "mirante do pão de açúcar",
-    "praia de grumari",
-    "arpoador rio de janeiro",
+    "Mulher gostosa",
+  "Mulher seminua",
+  "Mulher gostosa fake story",
+  "Mulher gostosa roça",
 ]
 
 FRASES_OVERLAY = [
-    "Bom dia, Rio! 🌅",
-    "Rio de Janeiro ❤️",
-    "A cidade maravilhosa 🌟",
-    "Rio lindo demais! 😍",
-    "Que vista, Rio! 🏙️",
-    "Cidade maravilhosa 🌈",
-    "Rio, você é incrível! ✨",
-    "Bom dia da cidade linda! 🌞",
-    "Rio te amo! 💚💛",
-    "Uma paisagem de tirar o fôlego 🤩",
-    "Motivo pra sorrir hoje 😊",
-    "Rio nos seus olhos 👀",
-    "Dia de admirar o Rio! 🦅",
-    "Orgulho de ser carioca! 🙌",
-    "Aqui é Rio! 🌊",
-    "Rio de coração 💙",
-    "Mais um dia lindo no Rio 🌺",
-    "Que lugar incrível! 🏖️",
-    "Beleza que não tem igual 🎇",
-    "Rio sempre encanta! 🌃",
+    "Mereço seu Oii?"
 ]
 
 LEGENDAS_FACEBOOK = [
-    "Rio hoje ☀️\n\nSempre lindo, sempre maravilhoso! ❤️\n\n#RioDeJaneiro #BomDia #CidadeMaravilhosa #RJ",
-    "Bom dia, cariocas! 🌅\n\nO Rio acordou assim hoje. Que vista incrível!\n\n#Rio #BomDia #VistaRio #PaisagensRio",
-    "Rio de Janeiro, você nunca decepciona 😍\n\nUma foto, mil motivos para amar essa cidade!\n\n#AmoRio #RioDeJaneiro #CidadeMaravilhosa",
-    "Quem disse que o paraíso fica longe? 🌈\n\nEle está bem aqui, no Rio de Janeiro!\n\n#Paraíso #RioDeJaneiro #PaisagemBrasileira",
-    "Hoje o Rio acordou assim 🌤️\n\nTal foto, tal cidade! Quem queria estar aqui agora? 👇\n\n#RJ #RioDeJaneiro #Vista",
-    "A cidade mais bonita do mundo? 🏆\n\nNós sabemos a resposta 😄❤️\n\n#RioDeJaneiro #CidadeMaisBonitaDoMundo #Carioca",
-    "Rio de Janeiro: onde a paisagem fala por si 📸\n\nMarque um amigo que precisa ver isso!\n\n#RioDeJaneiro #Paisagem #Fotografia",
-    "Impossível não se apaixonar 💘\n\nO Rio tem esse efeito em todo mundo!\n\n#AmorPeloRio #RioDeJaneiro #Turismo",
-    "Acorda, Rio! 🌞\n\nMais um dia lindo na cidade maravilhosa. Bom dia a todos!\n\n#BomDia #Rio #CidadeMaravilhosa",
-    "Você viu o Rio hoje? 👀\n\nEssa cidade nunca para de impressionar a gente!\n\n#RioDeJaneiro #Impressionante #BelezaNatural",
-    "Olha que coisa mais linda 🥰\n\nO Rio de Janeiro é uma obra de arte viva!\n\n#ObraDeArte #RioDeJaneiro #NaturezaBela",
-    "Rio: a cidade que nunca dorme e nunca para de encantar 🌃\n\n#RioNoturno #RioDeJaneiro #CidadeMaravilhosa",
-    "Quem é carioca, bate no peito! 🤜❤️\n\nQue cidade incrível é essa!\n\n#Carioca #OrgulhoCarioca #RioDeJaneiro",
-    "Registro do dia 📷\n\nO Rio de hoje tá assim! Me diz nos comentários: qual é o seu lugar favorito no Rio? 👇\n\n#RioDeJaneiro #Rio #Carioca",
-    "Você sabia que o Rio tem mais de 80 praias? 🏖️\n\nE olha que paisagem! Qual é a sua praia favorita?\n\n#PraiasCariocas #RioDeJaneiro #Verão",
-    "Um clique que vale mil palavras 🤳\n\nO Rio de Janeiro continua sendo a cidade mais fotogênica do Brasil!\n\n#Fotogênico #RioDeJaneiro #Brasil",
-    "Motivo número 1 pra visitar o Rio 😎\n\nEssa beleza toda em um só lugar!\n\n#VisiteRio #TurismoRio #RioDeJaneiro",
-    "Cidade maravilhosa, de fato! 🌟\n\nCom vistas assim, fica fácil entender o apelido!\n\n#CidadeMaravilhosa #RioDeJaneiro #Vista",
-    "O Rio te convida! 🎉\n\nVem se encantar com a beleza da cidade maravilhosa!\n\n#RioTeConvida #RioDeJaneiro #Turismo",
-    "Fim de semana chegando e o Rio tá assim! 🎊\n\nCurtiu? Compartilha com quem você levaria pro Rio! 👇\n\n#FimDeSemana #RioDeJaneiro #Passeio",
+    "Solicitou sua amizade", 
+  "Solicitou a sua amizade Aceita", 
+  "Solicitou a sua amizade👤", 
+  "solicitou sua amizadeAceitar! ✅", 
+  "👥 Catarina  solicitou sua amizade +100 vezes e gostou muito de você.", "Catarina solicitou sua amizade
+Aceitar! ✅
+.
+.
+.
+.
+." , 
+"👤𝙎𝙤𝙡𝙞𝙘𝙞𝙩𝙤𝙪 𝙨𝙪𝙖 𝙖𝙢𝙞𝙯𝙖𝙙𝙚 +𝟭𝟬𝟬 𝙫𝙚𝙯𝙚𝙨
+𝙑𝙤𝙘𝙚̂ 𝙚́ 𝙪𝙢 𝙜𝙖𝙩𝙤 🫵🏼🤭❤️", 
+"Solicitou sua amizade a 11 minutos...Aceitar ou recusar🥰🥰", 
+"Catarina solicitou amizade 👀 
+ #viralizar #lifestyle", 
+ "Ola vem fazer parte do meu grupinho sua amizade foi solitada #gostosa #linda #morena #bela #foto #love", 
+ "que seu dia seja incrível 😻 #superfas.                                            
+#mulher #caminhoneiro #taldaloira #gostosa #safada #viralphotochallenge #thaisaruna #melmaia #neymarjr" ,
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════
