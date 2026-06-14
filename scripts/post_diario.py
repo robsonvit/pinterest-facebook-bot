@@ -42,7 +42,8 @@ LEGENDAS_FACEBOOK = [
   "Solicitou a sua amizade Aceita", 
   "Solicitou a sua amizade👤", 
   "solicitou sua amizadeAceitar! ✅", 
-  "👥 Catarina  solicitou sua amizade +100 vezes e gostou muito de você.", "Catarina solicitou sua amizade
+  "👥 Catarina  solicitou sua amizade +100 vezes e gostou muito de você.", 
+  "Catarina solicitou sua amizade
 Aceitar! ✅
 .
 .
