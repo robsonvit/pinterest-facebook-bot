@@ -1,8 +1,9 @@
 {
-    "last_term_index": 0,
-    "last_caption_index": 0,
+    "last_term_index": 1,
+    "last_caption_index": 1,
     "last_overlay_index": 0,
     "posted_hashes": [
-        "dfcd607e7d7e5b97ade20e32a782220e"
+        "dfcd607e7d7e5b97ade20e32a782220e",
+        "05c00d3b7f4e53d8754e2bc925ad8135"
     ]
 }
