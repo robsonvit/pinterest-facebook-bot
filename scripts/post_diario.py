@@ -39,25 +39,25 @@ FRASES_OVERLAY = [
 
 LEGENDAS_FACEBOOK = [
     "Solicitou sua amizade", 
-  "Solicitou a sua amizade Aceita", 
-  "Solicitou a sua amizade👤", 
-  "solicitou sua amizadeAceitar! ✅", 
-  "👥 Catarina  solicitou sua amizade +100 vezes e gostou muito de você.", 
-  "Catarina solicitou sua amizade
+    "Solicitou a sua amizade Aceita", 
+    "Solicitou a sua amizade👤", 
+    "solicitou sua amizadeAceitar! ✅", 
+    "👥 Catarina  solicitou sua amizade +100 vezes e gostou muito de você.", 
+    """Catarina solicitou sua amizade
 Aceitar! ✅
 .
 .
 .
 .
-." , 
-"👤𝙎𝙤𝙡𝙞𝙘𝙞𝙩𝙤𝙪 𝙨𝙪𝙖 𝙖𝙢𝙞𝙯𝙖𝙙𝙚 +𝟭𝟬𝟬 𝙫𝙚𝙯𝙚𝙨
-𝙑𝙤𝙘𝙚̂ 𝙚́ 𝙪𝙢 𝙜𝙖𝙩𝙤 🫵🏼🤭❤️", 
-"Solicitou sua amizade a 11 minutos...Aceitar ou recusar🥰🥰", 
-"Catarina solicitou amizade 👀 
- #viralizar #lifestyle", 
- "Ola vem fazer parte do meu grupinho sua amizade foi solitada #gostosa #linda #morena #bela #foto #love", 
- "que seu dia seja incrível 😻 #superfas.                                            
-#mulher #caminhoneiro #taldaloira #gostosa #safada #viralphotochallenge #thaisaruna #melmaia #neymarjr" ,
+.""", 
+    """👤𝙎𝙤𝙡𝙞𝙘𝙞𝙩𝙤𝙪 𝙨𝙪𝙖 𝙖𝙢𝙞𝙯𝙖𝙙𝙚 +𝟭𝟬𝟬 𝙫𝙚𝙯𝙚𝙨
+𝙑𝙤𝙘𝙚̂ 𝙚́ 𝙪𝙢 𝙜𝙖𝙩𝙤 🫵🏼🤭❤️""", 
+    "Solicitou sua amizade a 11 minutos...Aceitar ou recusar🥰🥰", 
+    """Catarina solicitou amizade 👀 
+ #viralizar #lifestyle""", 
+    "Ola vem fazer parte do meu grupinho sua amizade foi solitada #gostosa #linda #morena #bela #foto #love", 
+    """que seu dia seja incrível 😻 #superfas.                                            
+#mulher #caminhoneiro #taldaloira #gostosa #safada #viralphotochallenge #thaisaruna #melmaia #neymarjr""",
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -65,8 +65,8 @@ Aceitar! ✅
 # ═══════════════════════════════════════════════════════════════════════════
 
 # Termo de pesquisa fixo atual (Altere aqui o termo que deseja buscar)
-SEARCH_TERM  = "foto do rio de janeiro" 
-# SEARCH_TERM  = random.choice(TERMOS_BUSCA) # Remova o comentário desta linha e apague a de cima para voltar a usar a lista
+# SEARCH_TERM  = "foto do rio de janeiro" 
+SEARCH_TERM  = random.choice(TERMOS_BUSCA) # Usando a lista aleatória novamente
 
 OVERLAY_TEXT = random.choice(FRASES_OVERLAY)
 FB_CAPTION   = random.choice(LEGENDAS_FACEBOOK)
