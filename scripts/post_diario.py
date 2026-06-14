@@ -96,13 +96,8 @@ LEGENDAS_FACEBOOK = [
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  SELEÇÃO ALEATÓRIA — usa data do dia como semente extra para
-#  garantir que rodadas no mesmo dia escolham a mesma combinação
-#  (evita duplicatas se o workflow rodar mais de uma vez no dia)
+#  SELEÇÃO ALEATÓRIA
 # ═══════════════════════════════════════════════════════════════════════════
-
-_semente = int(hashlib.md5(str(date.today()).encode()).hexdigest(), 16) % (2**32)
-random.seed(_semente)
 
 SEARCH_TERM  = random.choice(TERMOS_BUSCA)
 OVERLAY_TEXT = random.choice(FRASES_OVERLAY)
@@ -305,8 +300,12 @@ def main():
         print("ERRO: não foi possível baixar a imagem do Pinterest.")
         sys.exit(1)
 
-    editar_imagem("imagem_raw.jpg", OUTPUT_IMAGE, OVERLAY_TEXT)
-    publicar_facebook(OUTPUT_IMAGE, FB_CAPTION)
+    # Temporariamente desativada a edição de imagem
+    # editar_imagem("imagem_raw.jpg", OUTPUT_IMAGE, OVERLAY_TEXT)
+    # publicar_facebook(OUTPUT_IMAGE, FB_CAPTION)
+    
+    # Postar imagem original
+    publicar_facebook("imagem_raw.jpg", FB_CAPTION)
 
     print("\n✓ Fluxo concluído com sucesso!\n")
 
