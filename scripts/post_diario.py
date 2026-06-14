@@ -127,10 +127,8 @@ def baixar_imagem_pinterest(termo: str, destino: str = "imagem_raw.jpg") -> bool
         # Com credenciais: login headless → renova cookies a cada run
         if email and password:
             print("[Pinterest] Fazendo login (headless)...")
-            dl = (
-                PinterestDL.with_browser(headless=True)
-                .login(email, password)
-            )
+            dl = PinterestDL.with_browser(headless=True)
+            dl.login(email, password)
             url_busca = f"https://br.pinterest.com/search/pins/?q={urllib.parse.quote(termo)}"
             results = dl.scrape_and_download(
                 url=url_busca,
