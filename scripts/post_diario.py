@@ -66,29 +66,29 @@ FRASES_BOM_DIA = [
     "oii, mereço seu bom dia? 👀",
     "Bom dia, ótimo dia de trabalho pra vc 🥰😊",
     "Bom dia! Qual a nota que essa foto merece logo cedo? 👀",
-    "Acordei com uma energia ótima hoje! Já tomou seu café ou precisava dessa foto para despertar? ☕🥰",
-    "Bom dia! Dizem que a primeira coisa que você curte no dia define sua sorte... vai arriscar? 🤭✨",
-    "Passando para abençoar seu feed logo cedo. Mereço um 'bom dia' nos comentários? 👇😘"
+    "Acordei com uma energia ótima hoje! Já tomou seu \ncafé ou precisava dessa foto para despertar? ☕🥰",
+    "Bom dia! Dizem que a primeira coisa que você curte no dia \ndefine sua sorte... vai arriscar? 🤭✨",
+    "Passando para abençoar seu feed logo cedo \nMereço um 'bom dia' nos comentários? 👇😘"
 ]
 
 FRASES_BOA_TARDE = [
     "oii boa tarde 🥰 \no que achou da minha foto?",
     "oii, mereço seu boa tarde? 👀",
     "Boa tarde, de qual lugar do Brasil está me vendo?👀👇",
-    "Pausa rápida na correria só para deixar essa foto aqui... o que achou? 💖",
-    "Boa tarde! Se você pudesse me levar para almoçar hoje, para onde iríamos? 🍽️👀",
-    "Meio do dia e eu só queria saber uma coisa: qual a primeira palavra que vem à mente quando vê essa foto? 🙈",
-    "Boa tarde! O dia está corrido por aí também ou dá tempo de deixar um elogio aqui? 🥰"
+    "Pausa rápida na correria só para deixar \nessa foto aqui... o que achou? 💖",
+    "Boa tarde! Se você pudesse me levar para \nalmoçar hoje, para onde iríamos? 🍽️👀",
+    "Meio do dia e eu só queria saber uma coisa: qual a primeira \npalavra que vem à mente quando vê essa foto? 🙈",
+    "Boa tarde! O dia está corrido por aí também ou \ndá tempo de deixar um elogio aqui? 🥰"
 ]
 
 FRASES_BOA_NOITE = [
     "oii boa noite 🥰 \no que achou da minha foto?",
     "oii, mereço seu boa noite? 👀",
     "Boa noite, ótimo descanso pra vc 😊🥰",
-    "Pronta para relaxar... qual a boa de hoje à noite? 🌙✨",
-    "Boa noite! Dá um zoom na foto e me conta o que chamou mais a sua atenção 👀🔥",
-    "Passando só para te dar boa noite... mas confesso que adoraria ler o seu também. Deixa aqui? 🥰",
-    "Dia longo, mas não podia ir dormir sem postar essa. Gostou? Bons sonhos! 😴💖"
+    "Pronta para relaxar... \nqual a boa de hoje à noite? 🌙✨",
+    "Boa noite! Dá um zoom na foto e \nme conta o que chamou mais a sua atenção 👀🔥",
+    "Adoraria ler o seu BOA NOITE🌛 Deixa aqui? 🥰",
+    "Dia longo, mas não podia ir dormir sem postar essa. \nGostou? Bons sonhos! 😴💖"
 ]
 
 # Mapa de período → lista de frases
