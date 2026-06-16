@@ -356,14 +356,40 @@ def editar_imagem(entrada: str, saida: str, texto: str, template: dict):
 
     # ── Limpeza de Emojis para o Pillow ────────────────────────────────────
     # Como a fonte não suporta emojis, removemos caracteres não-textuais (maiores que 0x2500)
-    texto = ''.join(c for c in texto if ord(c) < 0x2500)
+    texto = ''.join(c for c in texto if ord(c) < 0x2500).strip()
+
+    # ── Quebra de linha automática (Word Wrap) ────────────────────────────
+    max_width = 940  # Deixa ~70px de margem de cada lado
+    def wrap_text(text, font, max_w):
+        linhas_finais = []
+        for linha in text.split('\n'):
+            palavras = linha.split(' ')
+            linha_atual = []
+            for palavra in palavras:
+                teste = ' '.join(linha_atual + [palavra]) if linha_atual else palavra
+                bbox = draw.textbbox((0, 0), teste, font=font)
+                w = bbox[2] - bbox[0]
+                if w <= max_w:
+                    linha_atual.append(palavra)
+                else:
+                    if linha_atual:
+                        linhas_finais.append(' '.join(linha_atual))
+                        linha_atual = [palavra]
+                    else:
+                        linhas_finais.append(palavra)
+                        linha_atual = []
+            if linha_atual:
+                linhas_finais.append(' '.join(linha_atual))
+        return '\n'.join(linhas_finais)
+
+    texto = wrap_text(texto, fonte_principal, max_width)
 
     # ── Pill colorida atrás do texto principal (cor do template) ──────────
-    bbox  = draw.textbbox((0, 0), texto, font=fonte_principal)
+    bbox  = draw.textbbox((0, 0), texto, font=fonte_principal, align="center")
     tw    = bbox[2] - bbox[0]
     th    = bbox[3] - bbox[1]
-    pad_h = 28
-    pad_v = 18
+    pad_h = 36
+    pad_v = 24
     pill_w = tw + pad_h * 2
     pill_h = th + pad_v * 2
 
@@ -375,7 +401,7 @@ def editar_imagem(entrada: str, saida: str, texto: str, template: dict):
     pill_layer = Image.new("RGBA", (pill_w, pill_h), (0, 0, 0, 0))
     draw_pill  = ImageDraw.Draw(pill_layer, "RGBA")
     draw_pill.rounded_rectangle([0, 0, pill_w - 1, pill_h - 1],
-                                 radius=pill_h // 2,
+                                 radius=min(pill_h // 2, 40),
                                  fill=template["pill"])
     img.paste(pill_layer, (pill_x, pill_y), pill_layer)
 
@@ -385,9 +411,9 @@ def editar_imagem(entrada: str, saida: str, texto: str, template: dict):
 
     for dx, dy in [(1, 1), (-1, 1), (1, -1), (-1, -1)]:
         draw.text((tx + dx, ty + dy), texto, font=fonte_principal,
-                  fill=template["sombra"])
+                  fill=template["sombra"], align="center")
 
-    draw.text((tx, ty), texto, font=fonte_principal, fill=template["fill"])
+    draw.text((tx, ty), texto, font=fonte_principal, fill=template["fill"], align="center")
 
     # ── Salvar ─────────────────────────────────────────────────────────────
     img.convert("RGB").save(saida, "JPEG", quality=93)
