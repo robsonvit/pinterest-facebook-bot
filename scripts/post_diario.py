@@ -406,13 +406,13 @@ def editar_imagem(entrada: str, saida: str, texto: str, template: dict):
     th    = bbox[3] - bbox[1]
     pad_h = 36
     pad_v = 24
-    pill_w = tw + pad_h * 2
-    pill_h = th + pad_v * 2
+    pill_w = int(tw + pad_h * 2)
+    pill_h = int(th + pad_v * 2)
 
     # Terço inferior: centro vertical em ~790px (de 1080)
     centro_y = 790
-    pill_x   = (1080 - pill_w) // 2
-    pill_y   = centro_y - pill_h // 2
+    pill_x   = int((1080 - pill_w) // 2)
+    pill_y   = int(centro_y - pill_h // 2)
 
     pill_layer = Image.new("RGBA", (pill_w, pill_h), (0, 0, 0, 0))
     draw_pill  = ImageDraw.Draw(pill_layer, "RGBA")
@@ -422,8 +422,8 @@ def editar_imagem(entrada: str, saida: str, texto: str, template: dict):
     img.paste(pill_layer, (pill_x, pill_y), pill_layer)
 
     # ── Texto principal — sombra leve + cor do template ───────────────────
-    tx = (1080 - tw) // 2
-    ty = centro_y - th // 2
+    tx = int((1080 - tw) // 2)
+    ty = int(centro_y - th // 2)
 
     for dx, dy in [(1, 1), (-1, 1), (1, -1), (-1, -1)]:
         draw.text((tx + dx, ty + dy), texto, font=fonte_principal,
