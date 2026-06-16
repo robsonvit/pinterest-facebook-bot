@@ -354,26 +354,9 @@ def editar_imagem(entrada: str, saida: str, texto: str, template: dict):
 
     draw = ImageDraw.Draw(img, "RGBA")
 
-    # ── Pill de localização (canto superior esquerdo) ──────────────────────
-    texto_local = "📍 Rio de Janeiro"
-    bbox_loc    = draw.textbbox((0, 0), texto_local, font=fonte_local)
-    lw          = bbox_loc[2] - bbox_loc[0]
-    lh          = bbox_loc[3] - bbox_loc[1]
-    pad_loc     = 14
-    pill_lx     = 36
-    pill_ly     = 52
-    pill_lw     = lw + pad_loc * 2
-    pill_lh     = lh + pad_loc
-
-    # Pill preto translúcido (32% opacidade) — clássico do iPhone
-    pill_loc = Image.new("RGBA", (pill_lw, pill_lh), (0, 0, 0, 0))
-    draw_pl  = ImageDraw.Draw(pill_loc, "RGBA")
-    draw_pl.rounded_rectangle([0, 0, pill_lw - 1, pill_lh - 1],
-                               radius=pill_lh // 2,
-                               fill=(0, 0, 0, 82))
-    img.paste(pill_loc, (pill_lx, pill_ly), pill_loc)
-    draw.text((pill_lx + pad_loc, pill_ly + pad_loc // 2),
-              texto_local, font=fonte_local, fill=(255, 255, 255, 230))
+    # ── Limpeza de Emojis para o Pillow ────────────────────────────────────
+    # Como a fonte não suporta emojis, removemos caracteres não-textuais (maiores que 0x2500)
+    texto = ''.join(c for c in texto if ord(c) < 0x2500)
 
     # ── Pill colorida atrás do texto principal (cor do template) ──────────
     bbox  = draw.textbbox((0, 0), texto, font=fonte_principal)
