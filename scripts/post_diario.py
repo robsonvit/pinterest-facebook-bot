@@ -21,7 +21,7 @@ import hashlib
 import requests
 from pathlib import Path
 from datetime import datetime, date
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance, ImageFilter
 import urllib.parse
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -298,14 +298,30 @@ def baixar_imagem_pinterest(termo: str, destino: str = "imagem_raw.jpg") -> bool
         return False
 
 
-def remover_metadados(caminho_imagem: str):
-    """Remove dados EXIF (metadados) da imagem."""
+def remover_metadados(caminho_imagem: str, nitidez: float = 1.3):
+    """
+    Remove dados EXIF (metadados) da imagem e aplica leve filtro de nitidez
+    para compensar a perda de qualidade da compressão original.
+
+    Args:
+        caminho_imagem: caminho do arquivo JPEG a processar.
+        nitidez: fator de nitidez (1.0 = sem alteração, >1.0 = mais nítido).
+                 Valor padrão 1.3 aplica uma melhoria sutil e segura.
+    """
     try:
         print("[Processamento] Removendo metadados da imagem...")
         img     = Image.open(caminho_imagem)
         img_rgb = img.convert("RGB")
-        img_rgb.save(caminho_imagem, "JPEG")
-        print("[Processamento] ✓ Metadados removidos com sucesso.")
+
+        # ── Filtro de nitidez para compensar compressão ────────────────────
+        if nitidez != 1.0:
+            enhancer = ImageEnhance.Sharpness(img_rgb)
+            img_rgb  = enhancer.enhance(nitidez)
+            print(f"[Processamento] ✓ Filtro de nitidez aplicado (fator {nitidez})")
+
+        # Salvar com qualidade alta para não perder detalhe na re-compressão
+        img_rgb.save(caminho_imagem, "JPEG", quality=95, subsampling=0)
+        print("[Processamento] ✓ Metadados removidos com sucesso (quality=95).")
     except Exception as e:
         print(f"[Processamento] Erro ao remover metadados: {e}")
 
