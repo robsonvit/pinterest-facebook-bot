@@ -1,6 +1,6 @@
 {
-    "last_term_index": 0,
-    "last_caption_index": 7,
+    "last_term_index": 1,
+    "last_caption_index": 8,
     "last_overlay_index": 0,
     "posted_hashes": [
         "dfcd607e7d7e5b97ade20e32a782220e",
@@ -87,6 +87,7 @@
         "7a3ea2f78c2c0e9581f13b2ba2fb55ba",
         "03f50a886e860ba783fe19e724470277",
         "aa113a7171918be5a6c06b1f138c2e21",
-        "bcd44778537854f361e5ad433b4bd04a"
+        "bcd44778537854f361e5ad433b4bd04a",
+        "f9e4760facfb2bd6e0bc3ab90baa9d07"
     ]
 }
